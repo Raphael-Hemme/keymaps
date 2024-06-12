@@ -22,11 +22,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //#define USE_MATRIX_I2C
 
+// Fix bug that prevents both halves from working when connected via TRRS
+
+#define SPLIT_USB_DETECT
+
 /* Select hand configuration */
 
 #define MASTER_LEFT
 // #define MASTER_RIGHT
 // #define EE_HANDS
+
+// Enable five layers (0 to 4)
+
+#define DYNAMIC_KEYMAP_LAYER_COUNT 5
 
 //#define QUICK_TAP_TERM 0
 //#define TAPPING_TERM 100
