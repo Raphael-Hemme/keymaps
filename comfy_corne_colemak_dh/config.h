@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define USE_MATRIX_I2C
 
 // Fix bug that prevents both halves from working when connected via TRRS
+// https://github.com/foostan/crkbd/issues/170#issuecomment-1104831554
 
 #define SPLIT_USB_DETECT
 
