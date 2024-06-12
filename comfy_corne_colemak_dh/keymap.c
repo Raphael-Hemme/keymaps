@@ -18,6 +18,28 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
+// The following enum and unicode_map are used to include unicode character mappings for the German umlauts from this "tutorial":
+// https://www.reddit.com/r/olkb/comments/c1986i/comment/hk8s5ux/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+enum unicode_names {
+  DESSS,
+  DEBAE,
+  DESAE,
+  DEBOE,
+  DESOE,
+  DEBUE,
+  DESUE
+}
+
+const uint32_t PROGMEM unicode_map[] = {
+  [DESSS]  = 0x00DF,  // ß
+  [DEBAE] = 0x00C4,   // Ä
+  [DESAE]  = 0x00E4,  // ä
+  [DEBOE]  = 0x00D6,  // Ö
+  [DESOE] = 0x00F6,   // ö
+  [DEBUE]  = 0x00DC,  // Ü
+  [DESUE]  = 0x00FC,  // ü
+}
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT_split_3x6_3(
   //,----------------------------------------------------------------------------------.                               ,-----------------------------------------------------------------------------------.
@@ -33,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [1] = LAYOUT_split_3x6_3(
   //,----------------------------------------------------------------------------------.                               ,-----------------------------------------------------------------------------------.
-      XXXXXXX,       XXXXXXX,       XXXXXXX,       XXXXXXX,       XXXXXXX,      XXXXXXX,                                       XXXXXXX,       XXXXXXX,       XXXXXXX,       XXXXXXX,       XXXXXXX, XXXXXXX,
+      XXXXXXX,       XXXXXXX,       XXXXXXX,       XXXXXXX,       XXXXXXX,      XXXXXXX,                                       KC_HOME,       KC_PGDN,       KC_PGUP,        KC_END,       XXXXXXX, KC_PSCR,
   //|--------+--------------+--------------+--------------+--------------+-------------|                               |--------------+--------------+--------------+--------------+--------------+--------|
       XXXXXXX,       KC_TRNS,       KC_TRNS,       KC_TRNS,       KC_TRNS,      XXXXXXX,                                       KC_LEFT,       KC_DOWN,         KC_UP,      KC_RIGHT,       XXXXXXX, XXXXXXX,
   //|--------+--------------+--------------+--------------+--------------+-------------|                               |--------------+--------------+--------------+--------------+--------------+--------|
@@ -67,15 +89,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                         //`------------------------------------------'  `--------------------------------------------'
   ),
 
-      [4] = LAYOUT_split_3x6_3(
+    [4] = LAYOUT_split_3x6_3(
   //,----------------------------------------------------------------------------------.                               ,-----------------------------------------------------------------------------------.
-      XXXXXXX,       XXXXXXX,       XXXXXXX,       XXXXXXX,       XXXXXXX,      XXXXXXX,                                       XXXXXXX,       XXXXXXX,       XXXXXXX,       XXXXXXX,       XXXXXXX, XXXXXXX,
+      XXXXXXX,       XXXXXXX,       XXXXXXX,       XXXXXXX,       XXXXXXX,      XXXXXXX,                                       XXXXXXX,       XXXXXXX,XP(DESUE, DEBUE),     XXXXXXX,       XXXXXXX, XXXXXXX,
   //|--------+--------------+--------------+--------------+--------------+-------------|                               |--------------+--------------+--------------+--------------+--------------+--------|
-      XXXXXXX,       XXXXXXX,       XXXXXXX,       XXXXXXX,       XXXXXXX,      XXXXXXX,                                       XXXXXXX,       XXXXXXX,       XXXXXXX,       XXXXXXX,       XXXXXXX, XXXXXXX,
+      XXXXXXX,XP(DESAE, DEBAE),     XXXXXXX,XP(DESSS, DESSS),     KC_LSFT,      XXXXXXX,                                       XXXXXXX,       KC_RSFT,       XXXXXXX,       XXXXXXX,XP(DESOE, DEBOE),XXXXXXX,
   //|--------+--------------+--------------+--------------+--------------+-------------|                               |--------------+--------------+--------------+--------------+--------------+--------|
       XXXXXXX,       XXXXXXX,       XXXXXXX,       XXXXXXX,       XXXXXXX,      XXXXXXX,                                       XXXXXXX,       XXXXXXX,       XXXXXXX,       XXXXXXX,       XXXXXXX, XXXXXXX,
   //|--------+--------------+--------------+--------------+--------------+-------------+-------------|  |--------------+--------------+--------------+--------------+--------------+--------------+--------|
-                                                                  XXXXXXX,      XXXXXXX,      XXXXXXX,          XXXXXXX,       XXXXXXX,       XXXXXXX
+                                                                  XXXXXXX,      XXXXXXX,      XXXXXXX,          XXXXXXX,       KC_TRNS,       XXXXXXX
                                                         //`------------------------------------------'  `--------------------------------------------'
   )
 };
