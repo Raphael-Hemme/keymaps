@@ -72,6 +72,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 #define OLED_FONT_H "keyboards/crkbd/lib/glcdfont.c"
 #define SPLIT_LAYER_STATE_ENABLE
+#define SPLIT_WPM_ENABLE //Enable WPM across split keyboards (+268).
+#define NO_ACTION_ONESHOT
+//#define SPLIT_OLED_ENABLE
 
 // Enable four layers (0 to 3)
 
