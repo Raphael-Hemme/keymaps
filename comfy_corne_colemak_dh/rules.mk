@@ -5,5 +5,3 @@ VIA_ENABLE      = yes    # Enable VIA
 OLED_ENABLE     = yes
 LTO_ENABLE      = yes
 WPM_ENABLE = yes
-UNICODE_COMMON = yes
-UNICODEMAP_ENABLE = yes
