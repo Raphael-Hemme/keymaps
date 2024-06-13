@@ -1,6 +1,9 @@
 /*
 Copyright 2019 @foostan
 Copyright 2020 Drashna Jaelre <@drashna>
+Copyright 2021 @HellSingCoder
+Copyright 2023 @asdfire1
+Copyright 2024 Raphael Hemme
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -75,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #ifdef OLED_ENABLE
 
-// Add the Luna animation from luna_colemak and my own logo to display on the screens
+// Add the Luna animation from colemak_luna and my own logo to display on the screens
 
 // Renders own logo converted into bite array with: https://mischianti.org/images-to-byte-array-online-converter-cpp-arduino/
 /* 32 * 32 logo */
@@ -93,7 +96,7 @@ static void render_logo(void) {
     oled_write_raw_P(rh_logo, sizeof(rh_logo));
 }
 
-// Render black logo to fix flashing pixels in the luna_colemak implementation
+// Render black logo to fix flashing pixels in the colemak_luna implementation
 static void render_black(void) {
     static const char PROGMEM black_logo[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
