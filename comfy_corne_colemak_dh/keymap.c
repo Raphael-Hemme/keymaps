@@ -21,6 +21,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
+enum custom_keycodes {
+  JS_ARROWFUNCTION = SAFE_RANGE,
+  RXJS_PIPE_SUBSCRIBE
+};
+
+enum combos {
+  DELF_COMBO,
+  DELS_COMBO
+};
+
+const uint16_t PROGMEM del_f_combo[] = {KC_DEL, KC_F, COMBO_END};
+const uint16_t PROGMEM del_s_combo[] = {KC_DEL, KC_P, COMBO_END};
+
+combo_t key_combos[] = {
+  [DELF_COMBO] = COMBO(del_f_combo, JS_ARROWFUNCTION),
+  [DELS_COMBO] = COMBO(del_s_combo, RXJS_PIPE_SUBSCRIBE),
+};
+
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // COLEMAK-DH  
@@ -32,7 +51,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------------+--------------+--------------+--------------+-------------|                               |--------------+--------------+--------------+--------------+--------------+--------|
       KC_LBRC,          KC_Z,          KC_X,          KC_C,          KC_D,         KC_V,                                          KC_K,          KC_H,       KC_COMM,        KC_DOT,       KC_SLSH, KC_RBRC,
   //|--------+--------------+--------------+--------------+--------------+-------------+-------------|  |--------------+--------------+--------------+--------------+--------------+--------------+--------|
-                                                                   KC_ESC,LT(1, KC_SPC),LT(2, KC_TAB),    LT(3, KC_ENT),RALT_T(KC_BSPC),        KC_DEL
+                                                                   KC_ESC,LT(1, KC_SPC),LT(2, KC_TAB),    LT(3, KC_ENT),RALT_T(KC_BSPC),       KC_DEL
                                                         //`------------------------------------------'  `--------------------------------------------'
   ),
 
@@ -327,10 +346,22 @@ bool oled_task_user(void) {
 }
 
 #endif
- bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        case JS_ARROWFUNCTION:
+            if (record->event.pressed) {
+                SEND_STRING("const arrowFunction = () => {\n\n}\n"SS_TAP(X_UP)SS_TAP(X_UP)SS_TAP(X_TAB));
+            }
+            break;
+
+        case RXJS_PIPE_SUBSCRIBE:
+            if (record->event.pressed) {
+                SEND_STRING(".pipe(\n\n)\n.subscribe()\n"SS_TAP(X_UP)SS_TAP(X_UP)SS_TAP(X_UP)SS_TAP(X_TAB));
+            }
+            break;
+
         /* KEYBOARD PET STATUS START */
- 
         case KC_LCTL:
             isSneaking = record->event.pressed;
             break;
@@ -345,7 +376,7 @@ bool oled_task_user(void) {
             break;
  
         /* KEYBOARD PET STATUS END */
-}
+    }
 
-return true;
+    return true;
 }
