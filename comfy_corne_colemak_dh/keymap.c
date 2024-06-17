@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include QMK_KEYBOARD_H
+#include "./custom_macros.h"
 
 enum custom_keycodes {
   JS_ARROWFUNCTION = SAFE_RANGE,
@@ -351,23 +352,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case JS_ARROWFUNCTION:
             if (record->event.pressed) {
-                SEND_STRING(
-                  "const aF = () => {\n" \
-                  SS_TAP(X_UP) \
-                  SS_TAP(X_RIGHT)SS_TAP(X_RIGHT)SS_TAP(X_RIGHT)SS_TAP(X_RIGHT) \
-                  SS_DOWN(X_LSFT)SS_TAP(X_RIGHT)SS_TAP(X_RIGHT)SS_UP(X_LSFT)
-                );
+                js_arrow_function_macro();
             }
             break;
 
         case RXJS_PIPE_SUBSCRIBE:
             if (record->event.pressed) {
-                SEND_STRING(
-                  ".pipe(\n" \
-                  SS_TAP(X_DOWN)SS_TAP(X_END)
-                  ".subscribe()\n" \
-                  SS_TAP(X_UP)SS_TAP(X_UP)SS_TAP(X_TAB)
-                );
+                rxjs_pipe_subscribe_macro();
             }
             break;
 

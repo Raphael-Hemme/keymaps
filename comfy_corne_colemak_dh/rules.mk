@@ -6,3 +6,5 @@ OLED_ENABLE     = yes
 LTO_ENABLE      = yes
 WPM_ENABLE = yes
 COMBO_ENABLE = yes
+
+SRC += custom_macros.c
