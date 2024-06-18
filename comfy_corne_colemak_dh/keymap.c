@@ -263,6 +263,7 @@ static void render_luna(int LUNA_X, int LUNA_Y) {
     /* this fixes the screen on and off bug */
     if (current_wpm > 0) {
         oled_on();
+        rgb_matrix_enable();
         anim_sleep = timer_read32();
     } else if(timer_elapsed32(anim_sleep) > OLED_TIMEOUT) {
         /* clear */
@@ -270,6 +271,7 @@ static void render_luna(int LUNA_X, int LUNA_Y) {
         oled_write("                                                                                                    ", false);
         oled_off();
         oled_set_cursor(LUNA_X,LUNA_Y);
+        rgb_matrix_disable();
     }
 }
 
@@ -294,6 +296,7 @@ if (current_wpm > 0) {
         render_black();
         oled_write("                                                                                                      ", false);
         oled_off();
+        rgb_matrix_disable();
     }
 }
 
@@ -363,16 +366,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
 
         /* KEYBOARD PET STATUS START */
-        case KC_LCTL:
+        case LCTL_T(KC_A):
             isSneaking = record->event.pressed;
             break;
-        case KC_SPC:
+        case LT(1, KC_SPC):
             isJumping = record->event.pressed;
             if (isJumping) {
                 showedJump = false;
             }
             break;
-        case KC_CAPS:
+        case LGUI_T(KC_S):
             isBarking = record->event.pressed;
             break;
  
